@@ -1,1 +1,108 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+	<style>
+		input{
+			border-radius: 45px;
+		}
+	</style>
+	
+    <script>
+        // Counter variable for the the number of students in the list
+        let Counter = 0;
+
+        function Success()
+        {
+            alert("All the data have been posted correctly!");
+        }
+      
+        function validation()
+        {
+            // In this functions we will check if the user had entered all the required information or not, and 
+            // whether the entered values are valid or not, to enable the 'add Record Button'
+            let EmailValid = false;
+            let TelValid = false;
+            let NameValid = false;
+            let IDValid = false;
+
+            // Get the information keyed in by the user  
+            let Name =document.getElementById("Name").value;
+            let ID = document.getElementById("ID").value;
+            let Email = document.getElementById("Email").value;
+            let Tel = document.getElementById("Tel").value;
+            
+
+            // Validate the email
+            if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(Email) && Email!="")
+            {
+                EmailValid = true;
+            }
+            else
+            {
+                EmailValid=false;
+            }
+            console.log("Email: " + EmailValid);   
+            
+            // Validating the Telephone Number
+            if (/^[0-9+]*$/.test(Tel) && Tel!="")
+                TelValid = true;
+            else
+                TelValid = false;
+            console.log("Tel: " + TelValid);   
+            
+            // Validating the Name (Assuming that names can take only letter and . - or ')
+            if (/^[\w\0-.'']*$/.test(Name) && Name!="")
+                NameValid = true;
+            else
+                NameValid = false;
+            console.log("Name: " + Name + "   " + NameValid);   
+            
+            // Validating the ID (Assuming that ID can take only Numbers)
+            if (/^[0-9]*$/.test(ID) && ID!="")
+                IDValid = true;
+            else
+                IDValid = false;
+            console.log("ID: " + IDValid);   
+            
+            // Check if any of them is missing and decid e whether to enable or disable the 'Add Record' button
+            if (NameValid ==false || IDValid == false || EmailValid==false || TelValid==false)
+            document.getElementById("Add").disabled = true;
+            else
+                document.getElementById("Add").disabled = false;            
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <h2>Controlling Elements Values and attributes</h2>
+
+    <form style="height: 250px; width:450px;">
+        <table style="margin: 20px; border-spacing: 20px;">
+            <tr>
+                <td><label for="Name">Student's Name:</label></td>
+                <td><input type="text" id="Name" value="" onchange="validation()"></td>
+            </tr>
+            <tr>
+                <td><label for="ID">Student's ID:</label></td>
+                <td><input type="text" id="ID" value="" onchange="validation()"></td>
+            </tr>
+            <tr>
+                <td><label for="Email">Email:</label></td>
+                <td><input type="email" id="Email" onchange="validation()"></td>
+            </tr>
+            <tr>
+                <td><label for="Tel">Tel.:</label></td>
+                <td><input type="Tel" id="Tel" onchange="validation()"></td>
+            </tr>
+            <tr>
+                <td><input type="Button" disabled id="Add" Value="Add Record" onclick="Success()" /> </td>
+            </tr>
+        </table>
+    </form>
+
+</body>
+
+</html>
